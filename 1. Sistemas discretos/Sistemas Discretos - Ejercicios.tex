@@ -1,0 +1,154 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}\graphicspath{{images/}}
+\usepackage{overpic} % Paquete necesario para superponer imágenes
+%\usepackage{subcaption}
+\usepackage[caption=false]{subfig}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{amssymb} % Necesario para \mathbb
+\usepackage{bm}
+\usepackage[makeroom]{cancel}
+\usepackage{nccmath}
+\usepackage[spanish,es-latin]{babel}
+
+
+%opening
+\title{Guía de Ejercicios - Sistemas de Tiempo Discreto}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\section{Discretización por ZOH}
+
+\begin{enumerate}
+	\item Dado el sistema
+	      \begin{align*}
+		      \frac{dx}{dt} & =-a\, x + b\,u \\
+		      y             & = c\, x
+	      \end{align*}
+	      Si la entrada es constante sobre períodos de tiempo $T$, obtener el sistema muestreado y evaluar cómo se mueven los polos según se varía $T$
+
+
+	\item Derivar los sistemas de tiempo discreto correspondientes a los siguientes de tiempo continuo. Considerar el uso de un ZOH
+
+	      \begin{enumerate}
+		      \item
+		            \begin{align*}
+			            \frac{dx}{dt} & = \begin{bmatrix}
+				                              0 & 1 \\ 0 & 0
+			                              \end{bmatrix} x + \begin{bmatrix} 0\\1 \end{bmatrix} u \\
+			            y             & = \begin{bmatrix}1 & 0 \end{bmatrix}
+		            \end{align*}
+		            Comprobar que es un doble integrador
+		      \item
+		            \begin{align*}
+			            \frac{dx}{dt} & = \begin{bmatrix}
+				                              -1 & 0 \\ 1 & 0
+			                              \end{bmatrix} x + \begin{bmatrix} 1\\0 \end{bmatrix} u \\
+			            y             & = \begin{bmatrix}0 & 1 \end{bmatrix}
+		            \end{align*}
+		            Comprobar que corresponde a un motor
+
+		      \item \begin{align*}
+			            \frac{dx}{dt} & = \begin{bmatrix}
+				                              0 & 1 \\ -1 & 0
+			                              \end{bmatrix} x + \begin{bmatrix} 0\\1 \end{bmatrix} u \\
+			            y             & = \begin{bmatrix}1 & 0 \end{bmatrix}
+		            \end{align*}
+		            ¿Qué clase de sistema es?
+		      \item \[ \frac{d^2y}{dt^2} + 3 \frac{dy}{dt}+2y = \frac{du}{dt}+3u \]
+		      \item \[ \frac{d^3y}{dt^3} = u \]
+	      \end{enumerate}
+	\item Se asume que las siguientes ecuaciones en diferencias describen sistemas en tiempo continuo muestreados con un circuito \textit{zero-order hold} y período de muestreo $h$.
+	      Determinar, si es posible, los correspondientes sistemas en tiempo continuo.
+
+	      \begin{enumerate}
+		      \item
+		            \[
+			            y(kh) - 0.5\,y(kh-h) = 6\,u(kh-h)
+		            \]
+
+		      \item
+		            \begin{align*}
+			            x(kh+h) & =\begin{bmatrix}-0.5 & 1    \\0    & -0.3\end{bmatrix}x(kh)+\begin{bmatrix}0.5 \\0.7\end{bmatrix}u(kh) \\
+			            y(kh)   & =\begin{bmatrix}1 & 1\end{bmatrix}x(kh)
+		            \end{align*}
+
+		      \item
+		            \[
+			            y(kh) + 0.5\,y(kh-h) = 6\,u(kh-h)
+		            \]
+	      \end{enumerate}
+	      ¿Es posible reconstruir siempre el sistema de tiempo continuo?
+
+	\item Considere el sistema continuo dado por
+	      \[
+		      G(s) \;=\; \frac{1}{s^{2}(s+2)(s+3)}.
+	      \]
+	      Suponga que la entrada es una suma de impulsos en los instantes de muestreo, es decir,
+	      \[
+		      u(t) \;=\; \sum_{k=-\infty}^{\infty} \delta\!\big(t-kh\big)\,u(kh),
+	      \]
+	      donde $\delta(\cdot)$ es el impulso de Dirac y $h>0$ es el período de muestreo.
+
+	      Determine la representación en tiempo discreto del sistema.
+
+
+	\item Determinar la función de transferencia por pulsos (pulse-transfer function) del siguiente sistema en tiempo discreto:
+
+	      \begin{align*}
+		      x(kh+h) & = \begin{bmatrix} 0.5 & -0.2\\0 & 0\end{bmatrix}x(kh)+\begin{bmatrix}2 \\ 1 \end{bmatrix}u(kh) \\
+		      y(kh)   & =\begin{bmatrix}1 & 0\end{bmatrix}x(kh)
+	      \end{align*}
+
+	\item Si $\beta<\alpha$ el siguiente sistema se conoce como red de adelanto
+	      \[ G(s)=\frac{s+\beta}{s+\alpha}\]
+
+	      Para el siguiente sistema discreto
+	      \[ H(z)=\frac{z+b}{z+a}\]
+	      determinar bajo qué condiciones funciona como red de adelanto
+
+
+	\item Sea el sistema
+	      \[ G(s)=\frac{s+b}{s+a}\]
+	      Obtener las condiciones para que el sistema muestreado con $T$ tenga inversa estable
+
+\end{enumerate}
+
+\section{Análisis de sistemas discretos}
+\begin{enumerate}
+	\item Dado el siguiente sistema de tiempo continuo
+	      \[G(s) = \frac{1}{s^2+1.4s+1}\]
+	      Obtener el sistema $H(z)$ muestreado con ZOH para $T=0.4$. Calcular los márgenes de ganancia para ambos. ¿Qué ocurre con el mismo al variar el tiempo de muestreo?
+
+	\item Obtener el error estacionario al escalón y a la rampa del siguiente sistema:
+	      \[y_k = H(q) u_k = \frac{q-0.5}{(q-0.8)(q-1)} \]
+
+	\item Dado el sistema discreto
+	      \[
+		      x(k+1)=\begin{bmatrix}
+			      0 & 1 & 2 \\ 0& 0 & 3 \\ 0&0&0
+		      \end{bmatrix}x(k)+\begin{bmatrix}
+			      0 \\ 1 \\ 0
+		      \end{bmatrix}
+		      u(k)
+	      \]
+
+	      \begin{enumerate}
+		      \item[(a)] Determine una secuencia de control $\{u(0),u(1),\dots\}$ tal que el sistema pase desde el estado inicial \(x^{\top}(0)=\begin{bmatrix}1 & 1 & 1\end{bmatrix}\) hasta el origen en un número finito de pasos.
+		      \item[(b)] ¿Cuál es el número mínimo de pasos necesario para resolver el problema planteado en (a)?
+		      \item[(c)] Explique por qué no es posible encontrar una secuencia de señales de control tal que el estado \(x^{\top}(0)=\begin{bmatrix} 1 & 1 & 1\end{bmatrix}\)
+		            sea alcanzado partiendo desde el origen.
+	      \end{enumerate}
+
+	\item Obtener el sistema muestreado de
+	      \[ G(s)=\frac{s+1}{s^2+0.2s+1}\]
+
+	      Determinar los valores de $T$ para los que el sistema tendrá oscilaciones ocultas
+\end{enumerate}
+
+
+\end{document}
