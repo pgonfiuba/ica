@@ -1,0 +1,504 @@
+[
+    {
+        "id": "0bb460ba334ef070",
+        "type": "tab",
+        "label": "Monitoreo del Tanque Conico",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "16d6de736a113dd6",
+        "type": "mqtt in",
+        "z": "0bb460ba334ef070",
+        "name": "",
+        "topic": "planta1/medida",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "136c726ed1eb3b8f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "ef550b1b951b28fb"
+            ]
+        ]
+    },
+    {
+        "id": "8bfe712365c67f52",
+        "type": "ui-chart",
+        "z": "0bb460ba334ef070",
+        "group": "4a38f48ef537ff97",
+        "name": "",
+        "label": "Trending de Altura",
+        "order": 1,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload.y",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "1",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "circle",
+        "pointRadius": 4,
+        "showLegend": true,
+        "removeOlder": "10",
+        "removeOlderUnit": "60",
+        "removeOlderPoints": "",
+        "colors": [
+            "#0095ff",
+            "#ff0000",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": "6",
+        "height": "6",
+        "className": "",
+        "interpolation": "step",
+        "x": 610,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1b01072c2bb6a48",
+        "type": "ui-gauge",
+        "z": "0bb460ba334ef070",
+        "name": "",
+        "group": "d12ce540d6ccc126",
+        "order": 1,
+        "value": "payload.y",
+        "valueType": "msg",
+        "width": "3",
+        "height": "6",
+        "gtype": "gauge-tank",
+        "gstyle": "needle",
+        "title": "Nivel del tanque cónico",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#99c1f1",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.25",
+                "color": "#62a0ea",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.5",
+                "color": "#3584e4",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.75",
+                "color": "#1a5fb4",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "1",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 630,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b46d867505018d4b",
+        "type": "mqtt out",
+        "z": "0bb460ba334ef070",
+        "name": "",
+        "topic": "planta1/u",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5fe59358cc4240c6",
+        "x": 360,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cceaed0c2334d453",
+        "type": "ui-slider",
+        "z": "0bb460ba334ef070",
+        "group": "4a38f48ef537ff97",
+        "name": "",
+        "label": "Apertura Comando [%]",
+        "tooltip": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": "true",
+        "showTicks": "always",
+        "min": 0,
+        "max": "100",
+        "step": "5",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": false,
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "b46d867505018d4b"
+            ]
+        ]
+    },
+    {
+        "id": "ef550b1b951b28fb",
+        "type": "json",
+        "z": "0bb460ba334ef070",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "d2c3649e07ddc2cc",
+                "0139f674df31331a",
+                "c1b01072c2bb6a48",
+                "8bfe712365c67f52"
+            ]
+        ]
+    },
+    {
+        "id": "38ec30979e377bf8",
+        "type": "ui-progress",
+        "z": "0bb460ba334ef070",
+        "group": "d12ce540d6ccc126",
+        "name": "",
+        "label": "Apertura Actual",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "color": "green",
+        "className": "",
+        "x": 840,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d2c3649e07ddc2cc",
+        "type": "function",
+        "z": "0bb460ba334ef070",
+        "name": "DesarmarJSON_u",
+        "func": "msg.payload = msg.payload.u;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            [
+                "38ec30979e377bf8"
+            ]
+        ]
+    },
+    {
+        "id": "0139f674df31331a",
+        "type": "ui-gauge",
+        "z": "0bb460ba334ef070",
+        "name": "",
+        "group": "6ecee0236b2bca3e",
+        "order": 1,
+        "value": "payload.Fin",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-34",
+        "gstyle": "needle",
+        "title": "Perturbación",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "m3/s",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.003",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "0.007",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": 0,
+        "max": "0.01",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 590,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "136c726ed1eb3b8f",
+        "type": "mqtt-broker",
+        "name": "ICA",
+        "broker": "000ea79fd6784cbb9ad2c51d6bbcbf60.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4a38f48ef537ff97",
+        "type": "ui-group",
+        "name": "Control",
+        "page": "a1fa873055fb782a",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d12ce540d6ccc126",
+        "type": "ui-group",
+        "name": "Mimico",
+        "page": "a1fa873055fb782a",
+        "width": "3",
+        "height": "7",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "5fe59358cc4240c6",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "000ea79fd6784cbb9ad2c51d6bbcbf60.s1.eu.hivemq.cloud",
+        "port": "8883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6ecee0236b2bca3e",
+        "type": "ui-group",
+        "name": "Caudal de Entrada",
+        "page": "a1fa873055fb782a",
+        "width": "3",
+        "height": "6",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a1fa873055fb782a",
+        "type": "ui-page",
+        "name": "Planta1",
+        "ui": "ef6ad9fa85e5e1f7",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "6eb38fe13fec71c1",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "ef6ad9fa85e5e1f7",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "6eb38fe13fec71c1",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "f4600b2cc03a951e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.30.2"
+        }
+    }
+]
