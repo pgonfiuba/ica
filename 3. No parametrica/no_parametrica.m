@@ -95,7 +95,7 @@ set(h,'linewidth',2);
 
 %% Efecto de aumentar la cantidad de muestras
 
-N = [500 2000 10000];
+N = [500 2000 50000];
 
 figure
 for k = 1:length(N)
@@ -105,9 +105,10 @@ for k = 1:length(N)
     y = idsim([u eN],th);
 
     % Periodograma
-    U = fft(u);
-    Y = fft(y);
-    H_per = Y.*conj(U)./(U.*conj(U));
+    U = fft(u,256);
+    Y = fft(y,256);
+    
+    H_per = Y./U;
 
     % Correlograma + FFT
     R = covf([y u],m+1);
@@ -116,11 +117,12 @@ for k = 1:length(N)
 
     subplot(3,1,k)
     w = (0:255)'*2*pi/256;
-    plot(w,abs(H_per(1:256)), ...
-         w,abs(H_cor))
+    semilogx(w,20*log10(abs(H_per(1:256))), ...
+         w,20*log10(abs(H_cor)),'LineWidth',2)
+    xlim([0.01,pi])
     grid
     title(['N = ' num2str(N(k))])
-    legend('Periodograma','Correlograma + FFT')
+    legend('Periodograma','Correlograma + FFT','Location','SouthWest')
 end
 
 %% Efecto de la ventana en la estimación espectral
