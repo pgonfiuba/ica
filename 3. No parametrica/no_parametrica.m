@@ -1,4 +1,6 @@
 %% Identificación por respuesta al impulso
+close all
+clear all
 
 % Modelo de referencia
 n = 10000;
@@ -125,44 +127,3 @@ for k = 1:length(N)
     legend('Periodograma','Correlograma + FFT','Location','SouthWest')
 end
 
-%% Efecto de la ventana en la estimación espectral
-
-% Correlograma con pocas muestras
-m = 20;
-%R = covf([y u],m+1);
-[h,R] = cra([y u],m+1);
-%h = R(:,2)/R(4,1);
-%h = R(:,2)/R(4,1);
-
-% Ventanas
-Nfft = 512;
-w = (0:Nfft/2)'*2*pi/Nfft;
-
-H_rect = fft(h,Nfft);
-H_hann = fft(h.*hann(length(h)),Nfft);
-H_hamm = fft(h.*hamming(length(h)),Nfft);
-
-% Modelo real
-H = squeeze(freqresp(th,w));
-
-% Comparación
-figure
-semilogx(w,20*log10(abs(H_rect(1:Nfft/2+1))), ...
-     w,20*log10(abs(H_hann(1:Nfft/2+1))), ...
-     w,20*log10(abs(H_hamm(1:Nfft/2+1))), ...
-     w,20*log10(abs(H)),'LineWidth',2)
-xlabel([0.01, pi])
-grid
-legend('Rectangular','Hann','Hamming','Modelo')
-xlabel('\omega [rad/muestra]')
-ylabel('Magnitud [dB]')
-
-figure
-plot(h,'o-','LineWidth',2)
-hold on
-plot(h.*hann(length(h)),'o-','LineWidth',2)
-plot(h.*hamming(length(h)),'o-','LineWidth',2)
-grid
-legend('Sin ventana','Hann','Hamming')
-xlabel('k')
-ylabel('h[k]')

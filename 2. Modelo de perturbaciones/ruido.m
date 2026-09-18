@@ -23,6 +23,7 @@ y2=filter(B2,A2,1*e);
 % 
 %  Señales temporales
 % 
+figure()
 plot([e y1 y2]);grid
 axis([2000 2500 -4 4])
 title(' Señales Temporales')
@@ -36,6 +37,7 @@ set(h,'linewidth',2);
 xe=xcorr(e,'coeff');
 xy1=xcorr(y1,'coeff');
 xy2=xcorr(y2,'coeff');
+figure()
 plot([xe xy1 xy2],'LineWidth',4);grid
 delta=100;
 axis([n-delta n+delta -.2 1])
@@ -51,6 +53,7 @@ pe=spa(e,[],w);
 py1=spa(y1,[],w);
 py2=spa(y2,[],w);
 %bodeplot(pe,py1,py2);grid
+figure()
 bode(pe,py1,py2);grid
 title('Espectros')
 legend('e','y1','y2')
