@@ -11,7 +11,8 @@ D = 1;
 F = 1;
 
 %th = idpoly(A, B, C);
-th = poly2th(A,B,C,D,F,1,1);
+Ts = 1;
+th = poly2th(A,B,C,D,F,1,Ts);
 
 % Ruido de medición
 e = 0.1*randn(n,1);
@@ -94,6 +95,24 @@ title('Espectros')
 h = findobj(gcf,'type','line');
 set(h,'linewidth',2);
 
+%% Ajuste por mínimos cuadrados de una transferencia a partir del correlograma
+% la magia está en fijar la cantidad de polos (2) y ceros (0) del sistema
+% de tiempo continuo
+H_id = tfest(H_cor,2,0)
+bode(H_id,H_cor,w_cor,th)
+legend('TF identificada','Correlograma','Modelo')
+h = findobj(gcf,'type','line');
+set(h,'linewidth',2);
+
+% Polos identificados en Z
+exp(pole(H_id))
+% Vs polos del modelo
+pole(th)
+
+% Ganancia de continua identificada
+dcgain(H_id)
+% Vs polos del modelo
+dcgain(th)
 
 %% Efecto de aumentar la cantidad de muestras
 
