@@ -22,7 +22,7 @@ Kp = 1;
 N = 2000;
 
 % Ruido blanco de medición
-rb = 0.1*randn(N,1);
+rb = 0.2*randn(N,1);
 
 % Referencia
 r = sign(randn(N,1));
@@ -96,7 +96,7 @@ legend('Real','arx221')
 
 %% Cómo resolvemos el polo inestable??
 % La identificación se efuerza por descubrir el polo en z=1
-% En el caso insesgado, IV4 y ARMAX tienen una precisión que disminuye
+% En el caso insesgado, IV4 y ARMAX tienen una precisión que aumenta
 % conforme aumenta N.
 % Con una tira de datos finita, es esperable que el polo en z=1 pueda
 % quedar fuera del círculo unidad
